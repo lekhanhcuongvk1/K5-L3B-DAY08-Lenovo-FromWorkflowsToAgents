@@ -2,10 +2,11 @@
 
 ## Thông tin nhóm
 
-- Tên nhóm:
-- Lớp: L3A
-- Repo nhóm: `K5-L3A-DAY08-TenNhom-FromWorkflowsToAgents` (xem [SUBMISSION.md](SUBMISSION.md))
-- URL repo, nhánh nộp, commit chốt:
+- Tên nhóm: Lenovo
+- Lớp: L3B
+- Repo nhóm: `K5-L3B-DAY08-Lenovo-FromWorkflowsToAgents`
+- URL repo: https://github.com/lekhanhcuongvk1/K5-L3B-DAY08-Lenovo-FromWorkflowsToAgents
+- Nhánh nộp, commit chốt: chưa chốt
 
 ## Thành viên
 
