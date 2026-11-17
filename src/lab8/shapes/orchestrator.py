@@ -19,7 +19,7 @@ ones. `lab8.trace.Trace` does this; your own tracer is fine if it matches.
 from __future__ import annotations
 
 from lab8.db import connect
-from lab8.durability import issue_refund
+from lab8.durability import InjectedCrash, issue_refund
 from lab8.handoff import make_handoff
 from lab8.runtime import run_readonly_investigators
 from lab8.schemas import Budget, RunResult, make_run_id
@@ -53,6 +53,9 @@ def run_claim(
         if not claim.get("order_id"):
             return done("needs_info", reason="missing_order_id")
 
+        # CP3: handoff is built by make_handoff (code allowlist, not an LLM summary).
+        # Only read-only tools, facts={} so no parent context crosses the boundary,
+        # and the trace records the sanitized handoff, never the claim row.
         handoff = make_handoff(
             request_id=f"REQ-{claim_id}", claim_id=claim_id,
             task="check_applicable_policy", facts={},
@@ -71,7 +74,14 @@ def run_claim(
         trace.add("quote", quote)
         if proposal <= 0:
             return done("denied", reason=quote["reason"])
-        outcome = issue_refund(conn, claim_id, proposal, crash_at=crash_at)
+        # CP3: forward crash_at to the host and let InjectedCrash propagate.
+        # The ledger row keyed refund:{claim_id} makes the resume a no-op replay.
+        try:
+            outcome = issue_refund(conn, claim_id, proposal, crash_at=crash_at)
+        except InjectedCrash:
+            trace.add("crash", {"at": crash_at})
+            trace.write()
+            raise
         if not outcome["ok"]:
             return done("failed" if outcome["conflict"] else "denied", proposal, outcome["reason"])
         return done("resolved", proposal)

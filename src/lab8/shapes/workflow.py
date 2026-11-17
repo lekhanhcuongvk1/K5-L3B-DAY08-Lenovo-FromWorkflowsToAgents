@@ -30,7 +30,7 @@ ones. `lab8.trace.Trace` does this; your own tracer is fine if it matches.
 from __future__ import annotations
 
 from lab8.db import connect
-from lab8.durability import issue_refund
+from lab8.durability import InjectedCrash, issue_refund
 from lab8.schemas import Budget, RunResult, make_run_id
 from lab8.shapes.common import finish
 from lab8.tools import compute_compensation, get_claim_view, lookup_order, tool_cost
@@ -75,7 +75,14 @@ def run_claim(
         if proposal <= 0:
             return done("denied", reason=quote["reason"])
 
-        outcome = issue_refund(conn, claim_id, proposal, crash_at=crash_at)
+        # CP3: forward crash_at to the host and let InjectedCrash propagate.
+        # The ledger row keyed refund:{claim_id} makes the resume a no-op replay.
+        try:
+            outcome = issue_refund(conn, claim_id, proposal, crash_at=crash_at)
+        except InjectedCrash:
+            trace.add("crash", {"at": crash_at})
+            trace.write()
+            raise
         if not outcome["ok"]:
             return done("failed" if outcome["conflict"] else "denied", proposal, outcome["reason"])
         return done("resolved", proposal)
