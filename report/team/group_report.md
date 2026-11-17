@@ -41,13 +41,15 @@ Benchmark dùng cùng 14 claim public, seed `11,22,33,44,55`, policy tại `2026
 
 Ba shape nhóm viết đều đạt 70/70 trial. Swarm đạt 69/70; trial `R-swarm-C-002-s55` trả `resolved` trong khi nhãn yêu cầu `denied`. Đây là điểm yếu có chủ đích của đối chứng: seed 55 khiến swarm lấy số ngày trong ticket thay cho order. Student matrix kiểm đúng sự khác biệt này, nên 248 test student pass không có nghĩa swarm đạt 100% benchmark.
 
-`src/reports/crash.json` ghi nhận crash safety 20/20. Suite này kiểm host và swarm tham chiếu; retry và crash/resume của ba shape được kiểm thêm qua T11/T12 trong student matrix. Lần kiểm tra gần nhất có 56 host tests pass, gồm hai test mới cho ablation; student matrix trước khi thêm variant có 248 passed. Chưa có kết quả hidden chính thức hoặc self-check trên `student_drop/` để báo cáo.
+`src/reports/crash.json` ghi nhận crash safety 20/20. Suite này kiểm host và swarm tham chiếu; retry và crash/resume của ba shape được kiểm thêm qua T11/T12 trong student matrix. Sau khi bổ sung bonus B4, bộ test mặc định đạt 100 passed và student matrix đạt 248 passed. Chưa có kết quả hidden chính thức hoặc self-check trên `student_drop/` để báo cáo.
 
 Ablation R3 bật thêm lượt investigator read-only thứ hai, cùng handoff và cùng tool, chạy tuần tự trước khi ghi tiền. Kết quả trong `src/reports/ablation_investigators.json` cho thấy cả cấu hình gốc và variant đều đạt 70/70. Cost/success tăng từ 46.43 lên 82.86 VND mô phỏng (+78.46%); mean tool calls tăng từ 4.64 lên 8.29. Mean/p95 trace events không đổi vì tracer ghi kết quả investigator ở mức tổng hợp. Vì vậy cần đọc thêm tool calls để thấy công việc tăng lên. Giả thuyết được hình thành sau khi xem benchmark bốn shape, nên đây là phân tích khám phá, không phải dự đoán đăng ký trước.
 
 Nhóm chọn workflow: cùng độ đúng public với single và orchestrator nhưng ít chi phí hơn, đồng thời dễ theo dõi đường đi của quyết định. Ablation chưa cho thấy lợi ích từ việc đọc lặp cùng dữ liệu. Lựa chọn sẽ được xem lại nếu tác vụ mới cần nguồn thông tin độc lập hoặc chuyên môn hóa và phép đo cho thấy lợi ích đủ rõ.
 
 Quyết định kiến trúc và lý do: xem `report/team/decision_adr.md`. Phiếu nghiên cứu và ablation: xem `report/team/research_card.md`.
+
+Phần mở rộng B4 được trình bày riêng trong `report/team/bonus_report.md`. Trên 490 trial của `src/reports/bonus_ablation.json`, rules-only khớp workflow; swarm pruned giữ pass rate nhưng giảm cost/success 1.46%. McNemar cho cặp workflow–swarm có p = 1.0, nên chưa đủ bằng chứng về chênh lệch độ đúng có ý nghĩa thống kê. Bỏ bước kiểm thiếu mã đơn làm workflow trả sai trạng thái ở C-004 trên cả năm seed. Kết quả này bổ sung lý do giữ luồng kiểm tra hiện tại.
 
 ## 5. Khó khăn và cách xử lý
 
