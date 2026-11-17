@@ -4,14 +4,14 @@
 
 - Họ tên: Lê Khánh Cường
 - MSSV: 2A202603999
-- Email:
-- GitHub:
+- Email: lekhanhcuongvk1@gmail.com
+- GitHub: lekhanhcuongvk1
 
 ## 2. Phần việc phụ trách
 
 Tôi phụ trách CP5: chạy benchmark, tổng hợp số liệu, hoàn thiện research card, ADR và báo cáo nhóm. Sau khi nhóm hoàn thành CP2–CP4, tôi dùng cùng bộ claim và seed để so sánh bốn kiến trúc, thay vì chọn theo số lượng agent hoặc mức độ phức tạp của code. Tôi cũng phụ trách phần mở rộng B4 về baseline, ablation và thống kê, cùng việc tự kiểm trên dữ liệu hidden không có nhãn.
 
-CP1 là phần chung của cả nhóm. Ba thành viên còn lại lần lượt phụ trách CP2, CP3 và CP4; phần việc của tôi tập trung vào đánh giá và giải thích kết quả, không nhận thay phần triển khai ba shape hay host của các checkpoint trước.
+CP1 là phần chung của cả nhóm. Ba thành viên còn lại lần lượt phụ trách CP2, CP3 và CP4. Tôi tiếp nhận kết quả từ các checkpoint này để đánh giá, so sánh và tổng hợp báo cáo.
 
 ## 3. Đóng góp cụ thể
 
@@ -41,7 +41,7 @@ Trên public, workflow đạt pass rate/pass^5 bằng 1.0, cost/success khoảng
 
 ## 5. Công cụ AI đã dùng
 
-Tôi sử dụng Codex để đọc yêu cầu, giải thích lệnh chạy, hỗ trợ xây dựng code/test cho ablation và B4, phân tích output và soạn bản nháp báo cáo theo template. Đây là phần việc có AI hỗ trợ; tôi không xem toàn bộ code và nội dung được gợi ý là phần tự viết từ đầu.
+Tôi sử dụng Codex để đọc yêu cầu, giải thích lệnh chạy, hỗ trợ xây dựng code/test cho ablation và B4, phân tích output và soạn bản nháp báo cáo theo template. Phần hỗ trợ này bao gồm cả code, test và cách trình bày kết quả. Tôi kiểm tra bằng các lệnh thực nghiệm và kiểm thử nêu trong báo cáo.
 
 Tôi trực tiếp chạy benchmark, hidden self-check và hai bộ pytest trong terminal, đối chiếu output với các file report và kiểm tra lại các lỗi submission còn thiếu. Các số liệu trong báo cáo lấy từ JSON do chương trình sinh ra, không sửa tay để đạt ngưỡng. Những nhận định về thống kê được đối chiếu bằng test có đáp án biết trước và kiểm định theo claim, thay vì chỉ dựa vào lời giải thích của AI.
 

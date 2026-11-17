@@ -6,7 +6,7 @@ Số liệu trong báo cáo được tổng hợp từ các file kết quả tro
 
 - Tên nhóm: Lenovo
 - Thành viên: xem `TEAM.md`
-- Commit chốt (trùng `report/team/decision_adr.md`):
+- Commit chốt (trùng `report/team/decision_adr.md`): 7238cf5a42287bbd586f1b3e582adb4c98e235d1
 
 ## 2. Mục tiêu và cách tiếp cận
 
@@ -41,7 +41,7 @@ Benchmark dùng cùng 14 claim public, seed `11,22,33,44,55`, policy tại `2026
 
 Ba shape nhóm viết đều đạt 70/70 trial. Swarm đạt 69/70; trial `R-swarm-C-002-s55` trả `resolved` trong khi nhãn yêu cầu `denied`. Đây là điểm yếu có chủ đích của đối chứng: seed 55 khiến swarm lấy số ngày trong ticket thay cho order. Student matrix kiểm đúng sự khác biệt này, nên 248 test student pass không có nghĩa swarm đạt 100% benchmark.
 
-`src/reports/crash.json` ghi nhận crash safety 20/20. Suite này kiểm host và swarm tham chiếu; retry và crash/resume của ba shape được kiểm thêm qua T11/T12 trong student matrix. Sau khi bổ sung bonus B4, bộ test mặc định đạt 100 passed và student matrix đạt 248 passed. Chưa có kết quả hidden chính thức hoặc self-check trên `student_drop/` để báo cáo.
+`src/reports/crash.json` ghi nhận crash safety 20/20. Suite này kiểm host và swarm tham chiếu; retry và crash/resume của ba shape được kiểm thêm qua T11/T12 trong student matrix. Sau khi bổ sung bonus B4, bộ test mặc định đạt 100 passed và student matrix đạt 248 passed. Tự kiểm trên 40 claim không nhãn trong `src/reports/hidden_selfcheck.json` có 200 trial cho mỗi shape workflow, single, orchestrator; tất cả không có lỗi chạy, lỗi contract trace hoặc leak suspect. `src/reports/bonus_hidden_selfcheck.json` ghi nhận tương tự cho năm cấu hình, tổng 1.000 trial. Hai report này không có pass rate và không thay thế kết quả hidden chính thức.
 
 Ablation R3 bật thêm lượt investigator read-only thứ hai, cùng handoff và cùng tool, chạy tuần tự trước khi ghi tiền. Kết quả trong `src/reports/ablation_investigators.json` cho thấy cả cấu hình gốc và variant đều đạt 70/70. Cost/success tăng từ 46.43 lên 82.86 VND mô phỏng (+78.46%); mean tool calls tăng từ 4.64 lên 8.29. Mean/p95 trace events không đổi vì tracer ghi kết quả investigator ở mức tổng hợp. Vì vậy cần đọc thêm tool calls để thấy công việc tăng lên. Giả thuyết được hình thành sau khi xem benchmark bốn shape, nên đây là phân tích khám phá, không phải dự đoán đăng ký trước.
 
@@ -66,10 +66,10 @@ Nhóm chia công việc theo checkpoint. CP1 do cả bốn người cùng thực
 | Checkpoint | Thành viên phụ trách | Công việc và đầu ra |
 | --- | --- | --- |
 | CP1 | Cả nhóm | Tự cài môi trường, chạy smoke/test và đọc contract trước khi làm phần riêng. |
-| CP2 | | Triển khai workflow, single, orchestrator; bảo đảm RunResult và các nhánh nghiệp vụ đúng contract. |
-| CP3 | | Hoàn thiện handoff read-only, truyền crash_at, kiểm retry và crash/resume trên các shape. |
-| CP4 | | Rà approval, cap theo order, trace/secret; chạy crash suite và lưu crash.json. |
-| CP5 | | Chạy benchmark, thực hiện ablation, thêm test kiểm chứng, tổng hợp research card, ADR và báo cáo nhóm. |
+| CP2 | Mai Danh Hiếu | Triển khai workflow, single, orchestrator; bảo đảm RunResult và các nhánh nghiệp vụ đúng contract. |
+| CP3 | Nguyễn Công Tú | Hoàn thiện handoff read-only, truyền crash_at, kiểm retry và crash/resume trên các shape. |
+| CP4 | Đặng Quang Duy | Rà approval, cap theo order, trace/secret; chạy crash suite và lưu crash.json. |
+| CP5 | Lê Khánh Cường | Chạy benchmark, thực hiện ablation và bonus B4, thêm test kiểm chứng, tổng hợp research card, ADR và báo cáo nhóm. |
 
 Nguồn đối chiếu đóng góp cá nhân là lịch sử commit, các test đã thêm hoặc sửa và kết quả chạy của từng checkpoint.
 

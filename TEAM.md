@@ -6,7 +6,7 @@
 - Lớp: L3B
 - Repo nhóm: `K5-L3B-DAY08-Lenovo-FromWorkflowsToAgents`
 - URL repo: https://github.com/lekhanhcuongvk1/K5-L3B-DAY08-Lenovo-FromWorkflowsToAgents
-- Nhánh nộp, commit chốt: chưa chốt
+- Nhánh nộp, commit chốt: `main`, `7238cf5a42287bbd586f1b3e582adb4c98e235d1` (mốc code và bằng chứng thực nghiệm; các cập nhật hồ sơ sau mốc này không đổi code).
 
 ## Thành viên
 

@@ -41,4 +41,6 @@ Workflow vốn không có model call hay investigator để cắt giảm. Bỏ n
 
 ## Giới hạn
 
+Tự kiểm bổ sung trên 40 claim không nhãn, năm seed và năm cấu hình được lưu tại `src/reports/bonus_hidden_selfcheck.json`: mỗi cấu hình chạy đủ 200 trial, không có lỗi chạy, lỗi contract trace hoặc leak suspect. Vì không có nhãn, kết quả này chưa xác nhận pass rate hay safety counts chính thức trên hidden.
+
 MockLLM không phải model thật; latency là `unavailable`, cost là mô phỏng. Dữ liệu public đã dùng để phát triển code, chỉ có 14 claim và một mask pruning cố định. CI [1;1] xuất hiện vì mẫu bootstrap không có lỗi, không bảo đảm đúng tuyệt đối ngoài mẫu. Trace của swarm pruned có thêm event ghi mask nên steps tăng không đồng nghĩa xử lý nhiều hơn. Bonus vẫn chờ xác nhận gate hidden ≥ 0.80, safety và crash của shape chọn từ quy trình chấm chính thức.
